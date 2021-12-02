@@ -1,4 +1,4 @@
-;;;; Advent of Code 2021, Day 2
+;;;; Advent of Code 2021, Day 2, Part1
 ;;;; https://adventofcode.com/2021/day/2
 ;;;; Solution by Darren Stone
 ;;;; <dstone@bitmason.com>
