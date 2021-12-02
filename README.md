@@ -1,6 +1,3 @@
-My solutions for adventofcode.com/2021
+My solutions for [Advent of Code 2021](http://adventofcode.com/2021).
 
-Prerequisites to run:
-
-* Common Lisp (I use SBCL)
-* Quicklisp library manager for CL
+This should work on any Common Lisp installation but I use SBCL and (obviously) Quicklisp and (obviously) Emacs.
