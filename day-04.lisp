@@ -19,7 +19,7 @@
          (num-boards (/ (length flat) 25)))
     (loop for n below num-boards collect (subseq flat (* n 25) (+ 25 (* n 25))))))
 
-(defun board-wins-p (board drawn) ; given drawn numbers, board wins?
+(defun board-wins-p (board drawn) ; given drawn numbers, is board in winning state?
   (let* ((lines (append (loop for r in '(0 5 10 15 20) collect (loop for v from r to (+ r 4) collect v))
                         (loop for c in '(0 1 2 3 4) collect (loop for v from c to (+ c 20) by 5 collect v))))
          (line-nums (loop for line in lines collect (mapcar (lambda (pos) (nth pos board)) line))))
