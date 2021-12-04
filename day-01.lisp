@@ -1,7 +1,6 @@
 ;;;; Advent of Code 2021, Day 1
 ;;;; https://adventofcode.com/2021/day/1
-;;;; Solution by Darren Stone
-;;;; <dstone@bitmason.com>
+;;;; Solution by Darren Stone <dstone@bitmason.com>
 
 (let* ((depths (mapcar 'parse-integer input))
 
