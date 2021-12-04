@@ -2,11 +2,11 @@
 ;;;; https://adventofcode.com/2021/day/4
 ;;;; Solution by Darren Stone <dstone@bitmason.com>
 
-(defun day-04-part-1 (input) (cadr (first (all-wins input))))
+(defun day-04-part-1 (input) (cadr (first (all-wins input)))) ; score of first winning board
 
-(defun day-04-part-2 (input) (cadar (last (all-wins input))))
+(defun day-04-part-2 (input) (cadar (last (all-wins input)))) ; score of last winning board
 
-(defun all-wins (input) ; list of all (board score) wins in drawn order
+(defun all-wins (input) ; list of all wins in drawn order: (board score) pairs
   (let ((deck (mapcar #'parse-integer (split "," (car input)))))
     (remove-duplicates (loop for drawn in (loop for n from 1 to (length deck) collect (subseq deck 0 n))
                              append (loop for board in (bingo-boards input)
