@@ -14,7 +14,7 @@
                                             collect (list board (board-score board drawn))))
                        :from-end t :test (lambda (a b) (equal (car a) (car b))))))
 
-(defun bingo-boards (input) ; list of 25-element lists of integers
+(defun bingo-boards (input) ; list of my boards (each is a 25-element list of integers)
   (let* ((flat (mapcar #'parse-integer (words (join " " (cdr input)))))
          (num-boards (/ (length flat) 25)))
     (loop for n below num-boards collect (subseq flat (* n 25) (+ 25 (* n 25))))))
