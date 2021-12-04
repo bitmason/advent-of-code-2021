@@ -1,7 +1,6 @@
 ;;;; Advent of Code 2021, Day 3
 ;;;; https://adventofcode.com/2021/day/3
-;;;; Solution by Darren Stone
-;;;; <dstone@bitmason.com>
+;;;; Solution by Darren Stone <dstone@bitmason.com>
 
 (defun day-03-part-1 (input)
   (let* ((lines-by-bit-at-pos (loop for n below (length (car input)) ; pair of lists per bit pos
