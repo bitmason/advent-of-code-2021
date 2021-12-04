@@ -1,7 +1,6 @@
 ;;;; Advent of Code 2021, Day 2
 ;;;; https://adventofcode.com/2021/day/2
-;;;; Solution by Darren Stone
-;;;; <dstone@bitmason.com>
+;;;; Solution by Darren Stone <dstone@bitmason.com>
 
 (defun day-02-part-1 (input)
   (let* ((hor-deps (mapcar 'cmd-to-hor-dep input))
