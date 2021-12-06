@@ -7,15 +7,21 @@
                                     collect (lines-by-nth-bit n input)))
          (gamma-rate (chars-to-int (mapcar (lambda (nth) (if (> (length (car nth))
                                                                 (length (cadr nth)))
-                                                             #\0 #\1)) lines-by-bit-at-pos)))
-         (epsilon-rate (logxor (- (expt 2 (length (car input))) 1) gamma-rate)))
+                                                             #\0 #\1))
+                                           lines-by-bit-at-pos)))
+         (epsilon-rate (logxor (- (expt 2 (length (car input))) 1)
+                               gamma-rate)))
     (* gamma-rate epsilon-rate)))
 
 (defun day-03-part-2 (input)
   (* (parse-integer (car (reduce #'o2-nums (loop for pos below (length (car input))
-                                                 collect pos) :initial-value input)) :radix 2)
+                                                 collect pos)
+                                 :initial-value input))
+                    :radix 2)
      (parse-integer (car (reduce #'co2-nums (loop for pos below (length (car input))
-                                                  collect pos) :initial-value input)) :radix 2)))
+                                                  collect pos)
+                                 :initial-value input))
+                    :radix 2)))
 
 (defun nth-bit-set-p (n str) (eq #\1 (nth n (coerce str 'list)))) ; nth char is #\1 ?
 
@@ -29,10 +35,18 @@
   (let* ((by-bit (lines-by-nth-bit pos nums))
          (nums-0 (car by-bit))
          (nums-1 (cadr by-bit)))
-    (if (eq 1 (length nums)) nums (if (> (length nums-0) (length nums-1)) nums-0 nums-1))))
+    (if (eq 1 (length nums))
+        nums
+        (if (> (length nums-0) (length nums-1))
+            nums-0
+            nums-1))))
 
 (defun co2-nums (nums pos) ; drop nums with majority bit at pos
   (let* ((by-bit (lines-by-nth-bit pos nums))
          (nums-0 (car by-bit))
          (nums-1 (cadr by-bit)))
-    (if (eq 1 (length nums)) nums (if (<= (length nums-0) (length nums-1)) nums-0 nums-1))))
+    (if (eq 1 (length nums))
+        nums
+        (if (<= (length nums-0) (length nums-1))
+            nums-0
+            nums-1))))
