@@ -11,9 +11,10 @@
         collect (count d (mapcar #'parse-integer (split "," (car input))))))
 
 (defun fish-days (days fish) ; return fish counts after given # days
+  (format t "~A: ~A~%" days fish)
   (if (= days 0)
       fish
       (fish-days (- days 1)
                  (append (subseq fish 1 7)
-                         (list (+ (first fish) (eighth fish)))
-                         (list (ninth fish) (first fish))))))
+                         (list (+ (nth 0 fish) (nth 7 fish)))
+                         (list (nth 8 fish) (nth 0 fish))))))
