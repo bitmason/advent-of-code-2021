@@ -8,22 +8,34 @@
 
 (defun all-wins (input) ; list of all wins in drawn order: (board score) pairs
   (let ((deck (mapcar #'parse-integer (split "," (car input)))))
-    (remove-duplicates (loop for drawn in (loop for n from 1 to (length deck) collect (subseq deck 0 n))
-                             append (loop for board in (bingo-boards input)
-                                          when (board-wins-p board drawn)
-                                            collect (list board (board-score board drawn))))
-                       :from-end t :test (lambda (a b) (equal (car a) (car b))))))
+    (remove-duplicates
+     (loop for drawn in (loop for n from 1 to (length deck)
+                              collect (subseq deck 0 n))
+           append (loop for board in (bingo-boards input)
+                        when (board-wins-p board drawn)
+                          collect (list board (board-score board drawn))))
+     :from-end t
+     :test (lambda (a b) (equal (car a) (car b))))))
 
-(defun bingo-boards (input) ; list of my boards (each is a 25-element list of integers)
+(defun bingo-boards (input) ; list of 25-element lists of integers
   (let* ((flat (mapcar #'parse-integer (words (join " " (cdr input)))))
          (num-boards (/ (length flat) 25)))
-    (loop for n below num-boards collect (subseq flat (* n 25) (+ 25 (* n 25))))))
+    (loop for n below num-boards
+          collect (subseq flat (* n 25) (+ 25 (* n 25))))))
 
 (defun board-wins-p (board drawn) ; given drawn numbers, is board in winning state?
-  (let* ((lines (append (loop for r in '(0 5 10 15 20) collect (loop for v from r to (+ r 4) collect v))
-                        (loop for c in '(0 1 2 3 4) collect (loop for v from c to (+ c 20) by 5 collect v))))
-         (line-nums (loop for line in lines collect (mapcar (lambda (pos) (nth pos board)) line))))
-    (some (lambda (line) (subsetp line drawn)) line-nums)))
+  (let* ((lines (append (loop for r in '(0 5 10 15 20)
+                              collect (loop for v from r to (+ r 4)
+                                            collect v))
+                        (loop for c in '(0 1 2 3 4)
+                              collect (loop for v from c to (+ c 20) by 5
+                                            collect v))))
+         (line-nums (loop for line in lines
+                          collect (mapcar (lambda (pos) (nth pos board))
+                                          line))))
+    (some (lambda (line) (subsetp line drawn))
+          line-nums)))
 
 (defun board-score (board drawn) ; score of given winning board and numbers drawn first to last
-  (* (car (last drawn)) (reduce #'+ (set-difference board drawn))))
+  (* (car (last drawn))
+     (reduce #'+ (set-difference board drawn))))
