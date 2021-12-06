@@ -3,10 +3,10 @@
 ;;;; Solution by Darren Stone <dstone@bitmason.com>
 
 (defun day-06 (input)
-  (list (reduce #'+ (fish-days 80 (fish-counts input)))
-        (reduce #'+ (fish-days 256 (fish-counts input)))))
+  (list (reduce #'+ (fish-days 80 (fish-counts input))) ; part 1
+        (reduce #'+ (fish-days 256 (fish-counts input))))) ; part 2
 
-(defun fish-counts (input) ; csv to fish count for day values (0,1,2,...,8)
+(defun fish-counts (input) ; csv => fish count for day values (0,1,2,...,8)
   (loop for d upto 8
         collect (count d (mapcar #'parse-integer (split "," (car input))))))
 
