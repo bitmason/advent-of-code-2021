@@ -11,7 +11,7 @@
     (list (overlap-count (remove-if-not #'line-orthag-p lines)) ; part 1
           (overlap-count lines)))) ; part 2
 
-(defun parse-vent-line (line)
+(defun parse-vent-line (line) ; "10,20 -> 30,40" => (10 20 30 40)
   (ppcre:register-groups-bind ((#'parse-integer x1 y1 x2 y2))
       ("(\\d+),(\\d+) -> (\\d+),(\\d+)" line) (list x1 y1 x2 y2)))
 
