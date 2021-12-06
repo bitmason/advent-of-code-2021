@@ -2,10 +2,6 @@
 ;;;; https://adventofcode.com/2021/day/5
 ;;;; Solution by Darren Stone <dstone@bitmason.com>
 
-;;;; Advent of Code 2021, Day 5
-;;;; https://adventofcode.com/2021/day/5
-;;;; Solution by Darren Stone <dstone@bitmason.com>
-
 (defun day-05 (input)
   (let ((lines (mapcar #'parse-vent-line input)))
     (list (overlap-count (remove-if-not #'line-orthag-p lines)) ; part 1
