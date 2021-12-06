@@ -3,17 +3,18 @@
 ;;;; Solution by Darren Stone <dstone@bitmason.com>
 
 (defun day-06 (input)
-  (list (length (fish-days 80 (mapcar #'parse-integer (split "," (car input))))) ; part 1
-        (length (fish-days 256 (mapcar #'parse-integer (split "," (car input))))))) ; part 2
+  (list (reduce #'+ (fish-days 80 (fish-counts input)))
+        (reduce #'+ (fish-days 256 (fish-counts input)))))
 
-(defun fish-days (days fish) ; return fish state after given # days
+(defun fish-counts (input) ; csv to fish count for day values (0,1,2,...,8)
+  (loop for d upto 8
+        collect (count d (mapcar #'parse-integer (split "," (car input))))))
+
+(defun fish-days (days fish) ; return fish counts after given # days
+  (format t "~A: ~A~%" days fish)
   (if (= days 0)
       fish
       (fish-days (- days 1)
-                 (append (mapcar (lambda (d)
-                                   (if (= d 0)
-                                       6
-                                       (- d 1)))
-                                 fish)
-                         (make-list (count 0 fish)
-                                    :initial-element 8)))))
+                 (append (subseq fish 1 7)
+                         (list (+ (first fish) (eighth fish)))
+                         (list (ninth fish) (first fish))))))
