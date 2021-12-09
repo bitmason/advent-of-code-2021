@@ -43,8 +43,6 @@
             (6 ,(lambda (segs) (and (= 6 (length segs))  ; 6 segs & adding "1" makes 7 segs
                                    (= 7 (length (union segs (aref dig-segs 1))))))))
           do (set-dig (car dp) dig-segs sig-pats (second dp))) ; deduce all to fill dig-segs
-    ;(loop for dp in dig-preds
-    ;      do (set-dig (car dp) dig-segs sig-pats (second dp)))
     (loop for out-segs in out-digs
           for place in '(1000 100 10 1)
           sum (* (segs-pos out-segs dig-segs)  ; find digit represented by out-segs
