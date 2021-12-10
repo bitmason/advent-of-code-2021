@@ -30,18 +30,18 @@
             (7 ,(lambda (segs) (= (length segs) 3)))  ; unique seg count
             (8 ,(lambda (segs) (= (length segs) 7)))  ; unique seg count
             (3 ,(lambda (segs) (and (= (length segs) 5)  ; 5 segs incl "1"
-                                   (subsetp (aref dig-segs 1) segs))))
+                                    (subsetp (aref dig-segs 1) segs))))
             (9 ,(lambda (segs) (and (= 6 (length segs))  ; 6 segs incl "3"
-                                   (subsetp (aref dig-segs 3) segs))))
+                                    (subsetp (aref dig-segs 3) segs))))
             (0 ,(lambda (segs) (and (= 6 (length segs))  ; 6 segs, not "9", incl "1"
-                                   (set-exclusive-or segs (aref dig-segs 9))
-                                   (subsetp (aref dig-segs 1) segs))))
+                                    (set-exclusive-or segs (aref dig-segs 9))
+                                    (subsetp (aref dig-segs 1) segs))))
             (2 ,(lambda (segs) (and (= 5 (length segs))  ; 5 segs, 3 segs diff than "4"
-                                   (= 3 (length (set-difference segs (aref dig-segs 4)))))))
+                                    (= 3 (length (set-difference segs (aref dig-segs 4)))))))
             (5 ,(lambda (segs) (and (= 5 (length segs))  ; 5 segs & not yet classified
-                                   (not (segs-pos segs dig-segs)))))
+                                    (not (segs-pos segs dig-segs)))))
             (6 ,(lambda (segs) (and (= 6 (length segs))  ; 6 segs & adding "1" makes 7 segs
-                                   (= 7 (length (union segs (aref dig-segs 1))))))))
+                                    (= 7 (length (union segs (aref dig-segs 1))))))))
           do (set-dig (car dp) dig-segs sig-pats (second dp))) ; deduce all to fill dig-segs
     (loop for out-segs in out-digs
           for place in '(1000 100 10 1)
