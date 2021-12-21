@@ -41,7 +41,9 @@ pub fn apply(algo: *Algo, img: *Img) void {
                 for (neighbs) |nxy, n| {
                     const nx: isize = @intCast(isize, x) + nxy.x;
                     const ny: isize = @intCast(isize, y) + nxy.y;
-                    if (img[@intCast(usize, ny)][@intCast(usize, nx)] == '#') hood |= @intCast(usize, 1) << @intCast(u6, n);
+                    if (img[@intCast(usize, ny)][@intCast(usize, nx)] == '#') {
+                        hood |= @intCast(usize, 1) << @intCast(u6, n);
+                    }
                 }
             }
             img_new[y][x] = algo[hood];
